@@ -4,6 +4,7 @@ import com.project.userService.external.repository.UserRepository;
 import com.project.userService.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @Service
 public class UserService {
     UserRepository userRepository;
+    BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
     public ResponseEntity<User> getUser(Integer id) {
        Optional<User> optionalUser = userRepository.findById(id);
        if(optionalUser.isPresent()){
@@ -22,6 +24,7 @@ public class UserService {
     }
 
     public ResponseEntity<User> addUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
         return ResponseEntity.ok(savedUser);
     }
