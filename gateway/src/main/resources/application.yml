@@ -11,10 +11,10 @@ spring:
         gateway:
             mvc:
                 routes:
-                    - id: users
+                    - id: auth
                       uri: "http://localhost:8090"
                       predicates:
-                          - Path=/user/**
+                          - Path=/auth/**
 
                     - id: notifications
                       uri: "http://localhost:8091"
