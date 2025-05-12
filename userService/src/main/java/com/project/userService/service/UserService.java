@@ -1,5 +1,6 @@
 package com.project.userService.service;
 
+import com.project.userService.dto.UserDto;
 import com.project.userService.external.repository.UserRepository;
 import com.project.userService.model.User;
 import lombok.AllArgsConstructor;
@@ -14,10 +15,19 @@ import java.util.Optional;
 public class UserService {
     UserRepository userRepository;
 
-    public ResponseEntity<User> getUser(Integer id) {
+    public ResponseEntity<UserDto> getUser(Integer id) {
        Optional<User> optionalUser = userRepository.findById(id);
        if(optionalUser.isPresent()){
-           return ResponseEntity.ok(optionalUser.get());
+           User user = optionalUser.get();
+           UserDto userDto = new UserDto();
+           userDto.setId(user.getId());
+           userDto.setUsername(user.getUsername());
+           userDto.setName(user.getName());
+           userDto.setEmail(user.getEmail());
+           userDto.setPhoneNumber(user.getPhoneNumber());
+           userDto.setAddress(user.getAddress());
+           userDto.setProfilePhoto(user.getProfilePhoto());
+           return ResponseEntity.ok(userDto);
        }
        return ResponseEntity.notFound().build();
     }

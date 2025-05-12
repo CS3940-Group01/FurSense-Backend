@@ -1,14 +1,13 @@
 package com.project.userService.application.controllers;
 
+import com.project.userService.dto.UserDto;
 import com.project.userService.model.User;
 import com.project.userService.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -18,13 +17,13 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/getAllUsers")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return userService.getAllUsers();
-    }
+//    @GetMapping("/getAllUsers")
+//    public ResponseEntity<List<User>> getAllUsers() {
+//        return userService.getAllUsers();
+//    }
 
     @GetMapping("/getuser")
-    public ResponseEntity<User> getUser(@RequestHeader("userId") String userIdHeader) {
+    public ResponseEntity<UserDto> getUser(@RequestHeader("userId") String userIdHeader) {
         try {
             Integer userId = Integer.parseInt(userIdHeader);
             return userService.getUser(userId);

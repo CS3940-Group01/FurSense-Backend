@@ -88,10 +88,7 @@ public class User {
         this.profilePhoto = profilePhoto;
     }
 
-
-
-
-    }
+}
     
 
 
