@@ -1,9 +1,10 @@
-package com.project.userService.model;
+package com.project.authService.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Entity
 @Data
@@ -88,3 +89,9 @@ public class User {
     }
 
 }
+    
+
+
+
+
+
