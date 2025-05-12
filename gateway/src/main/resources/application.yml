@@ -30,3 +30,10 @@ spring:
                       - Path=/notifications/**
                   filters:
                      - AuthFilter
+
+                - id: user
+                  uri: "http://localhost:8092"
+                  predicates:
+                    - Path=/user/**
+                  filters:
+                    - AuthFilter

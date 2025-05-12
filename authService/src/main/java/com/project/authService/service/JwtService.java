@@ -18,11 +18,12 @@ public class JwtService {
     public static final Key SECRET = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     // Validate the token
-    public void validateToken(String token) {
-        Jws<Claims> claimsJws = Jwts.parserBuilder()
-                .setSigningKey(SECRET)  // Use the key directly
+    public Claims validateToken(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(SECRET)
                 .build()
-                .parseClaimsJws(token);
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     // Generate a token with the given username
@@ -31,13 +32,14 @@ public class JwtService {
         return createToken(claims, username);
     }
 
+
     // Create token using claims and username
     private String createToken(Map<String, Object> claims, String username) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)) // 30 minutes expiration
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))    // 1 week expiration
                 .signWith(SECRET, SignatureAlgorithm.HS256)  // Use the SECRET key directly
                 .compact();
     }
