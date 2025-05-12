@@ -4,6 +4,7 @@ import com.project.authService.dto.AuthRequest;
 import com.project.authService.external.repository.UserRepository;
 import com.project.authService.model.User;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -27,10 +28,7 @@ public class AuthService {
 
     public ResponseEntity<User> getUser(Integer id) {
        Optional<User> optionalUser = userRepository.findById(id);
-       if(optionalUser.isPresent()){
-           return ResponseEntity.ok(optionalUser.get());
-       }
-       return ResponseEntity.notFound().build();
+        return optionalUser.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     public ResponseEntity<String> editUser(User user) {
@@ -70,10 +68,8 @@ public class AuthService {
                     new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
 
             if (authenticate.isAuthenticated()) {
-                System.out.println("Authenticated");
                 return generateToken(authRequest.getUsername());
             } else {
-                System.out.println("Not Authenticated");
                 throw new RuntimeException("Authentication failed");
             }
 
@@ -89,7 +85,23 @@ public class AuthService {
         return jwtService.generateToken(username);
     }
 
-    public void validateToken(String token) {
-        jwtService.validateToken(token);
+    public ResponseEntity<String> validate(String token) {
+        System.out.println(token);
+        try {
+            jwtService.validateToken(token);  // Call your service method to validate the token
+            System.out.println("Token validated");
+            return ResponseEntity.ok("Token is valid");
+        } catch (IllegalArgumentException e) {
+            // Handle invalid or expired token case
+            System.out.println("Token is invalid");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid or expired token: " + e.getMessage());
+        } catch (Exception e) {
+            // Handle any other unexpected errors
+            System.out.println("Token is invalid");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while validating the token: " + e.getMessage());
+        }
     }
+
 }

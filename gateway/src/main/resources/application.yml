@@ -1,6 +1,13 @@
 server:
     port: 8080
 
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web.reactive.function.client.ExchangeFunctions: TRACE
+    reactor.netty.http.client: DEBUG
+    com.fursense.gateway: DEBUG
+
 spring:
     application:
         name: gateway
@@ -9,14 +16,17 @@ spring:
         discovery:
             enabled: true
         gateway:
-            mvc:
-                routes:
-                    - id: auth
-                      uri: "http://localhost:8090"
-                      predicates:
-                          - Path=/auth/**
+            routes:
+                - id: auth
+                  uri: "http://localhost:8090"
+                  predicates:
+                      - Path=/auth/**
+                  filters:
+                    - AuthFilter
 
-                    - id: notifications
-                      uri: "http://localhost:8091"
-                      predicates:
-                          - Path=/notifications/**
+                - id: notifications
+                  uri: "http://localhost:8091"
+                  predicates:
+                      - Path=/notifications/**
+                  filters:
+                     - AuthFilter
