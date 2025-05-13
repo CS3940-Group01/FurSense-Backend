@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@AllArgsConstructor
+
 public class AuthController {
 
     private AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
 
     @PostMapping("/register")
