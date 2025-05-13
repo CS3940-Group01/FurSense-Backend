@@ -1,7 +1,7 @@
 package com.petService.petService.service;
 
+import com.petService.petService.external.repository.MedicalHistoryRepository;
 import com.petService.petService.model.MedicalHistory;
-import com.petService.petService.repository.MedicalHistoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
