@@ -37,3 +37,10 @@ spring:
                     - Path=/user/**
                   filters:
                     - AuthFilter
+
+                - id: pet
+                  uri: "http://localhost:8093"
+                  predicates:
+                    - Path=/pet/**
+                  filters:
+                    - AuthFilter
