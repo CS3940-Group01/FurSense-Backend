@@ -1,5 +1,5 @@
 server:
-    port: 8080
+    port: ${PORT:8080}
 
 logging:
   level:
@@ -18,28 +18,28 @@ spring:
         gateway:
             routes:
                 - id: auth
-                  uri: "http://localhost:8090"
+                  uri: ${AUTH_SERVICE_URL:http://localhost:8090}
                   predicates:
                       - Path=/auth/**
                   filters:
                     - AuthFilter
 
                 - id: notifications
-                  uri: "http://localhost:8091"
+                  uri: ${NOTIFICATIONS_SERVICE_URL:http://localhost:8091}
                   predicates:
                       - Path=/notifications/**
                   filters:
                      - AuthFilter
 
                 - id: user
-                  uri: "http://localhost:8092"
+                  uri: ${USER_SERVICE_URL:http://localhost:8092}
                   predicates:
                     - Path=/user/**
                   filters:
                     - AuthFilter
 
                 - id: pet
-                  uri: "http://localhost:8093"
+                  uri: ${PET_SERVICE_URL:http://localhost:8093}
                   predicates:
                     - Path=/pet/**
                   filters:
