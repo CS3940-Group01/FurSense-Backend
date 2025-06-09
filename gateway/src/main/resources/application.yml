@@ -1,5 +1,5 @@
 server:
-    port: 8080
+  port: 8080
 
 logging:
   level:
@@ -9,38 +9,38 @@ logging:
     com.fursense.gateway: DEBUG
 
 spring:
-    application:
-        name: gateway
+  application:
+    name: gateway
 
-    cloud:
-        discovery:
-            enabled: true
-        gateway:
-            routes:
-                - id: auth
-                  uri: "http://localhost:8090"
-                  predicates:
-                      - Path=/auth/**
-                  filters:
-                    - AuthFilter
+  cloud:
+    discovery:
+      enabled: true
+    gateway:
+      routes:
+        - id: auth
+          uri: "http://localhost:8094"
+          predicates:
+            - Path=/auth/**
+          filters:
+            - AuthFilter
 
-                - id: notifications
-                  uri: "http://localhost:8091"
-                  predicates:
-                      - Path=/notifications/**
-                  filters:
-                     - AuthFilter
+        - id: notifications
+          uri: "http://localhost:8091"
+          predicates:
+            - Path=/notifications/**
+          filters:
+            - AuthFilter
 
-                - id: user
-                  uri: "http://localhost:8092"
-                  predicates:
-                    - Path=/user/**
-                  filters:
-                    - AuthFilter
+        - id: user
+          uri: "http://localhost:8092"
+          predicates:
+            - Path=/user/**
+          filters:
+            - AuthFilter
 
-                - id: pet
-                  uri: "http://localhost:8093"
-                  predicates:
-                    - Path=/pet/**
-                  filters:
-                    - AuthFilter
+        - id: pet
+          uri: "http://localhost:8093"
+          predicates:
+            - Path=/pet/**,/vaccine/**
+          filters:
+            - AuthFilter
