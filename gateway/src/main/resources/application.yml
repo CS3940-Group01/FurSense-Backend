@@ -44,3 +44,10 @@ spring:
                     - Path=/pet/**
                   filters:
                     - AuthFilter
+
+                - id: pet
+                  uri: ${CHATBOT_URL:http://localhost:4200/inference}
+                  predicates:
+                    - Path=/inference/**
+                  filters:
+                    - AuthFilter
