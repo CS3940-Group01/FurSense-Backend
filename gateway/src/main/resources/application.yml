@@ -9,8 +9,8 @@ logging:
     com.fursense.gateway: DEBUG
 
 spring:
-    application:
-        name: gateway
+  application:
+    name: gateway
 
     cloud:
         discovery:

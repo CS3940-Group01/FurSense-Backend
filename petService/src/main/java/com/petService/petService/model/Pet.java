@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.Date; // or java.time.LocalDate (recommended)
 
 @Entity
 @Table(name = "pets")
@@ -21,7 +22,12 @@ public class Pet {
 
     private Integer age;
 
+    private String image;
+
     private Integer ownerId; // this links to a User entity
+
+    private Date birthDate;
+
 
     public Integer getId() {
         return id;
@@ -61,5 +67,21 @@ public class Pet {
 
     public void setOwnerId(Integer ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
