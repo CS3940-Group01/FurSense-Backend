@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 :: Define base directory
-set "BASE_DIR=C:\Users\janin\Desktop\FurSense-Backend"
+set "BASE_DIR=C:\Users\DOWNLOAD\Desktop\fursense\FurSense-Backend"
 set SERVICES=gateway authService notifications userService petService
 
 echo 📦 Building microservices...
