@@ -45,9 +45,9 @@ spring:
                   filters:
                     - AuthFilter
 
-                - id: pet
-                  uri: ${CHATBOT_URL:http://localhost:4200/inference}
+                - id: chatbot
+                  uri: ${CHATBOT_URL:http://localhost:4200/chatbot}
                   predicates:
-                    - Path=/inference/**
+                    - Path=/chatbot/**
                   filters:
                     - AuthFilter
