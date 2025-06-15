@@ -21,7 +21,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
     public AuthFilter(RouteValidator validator, WebClient.Builder webClientBuilder) {
         super(Config.class);
         this.validator = validator;
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8090/auth").build(); // your Auth service
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8094/auth").build(); // your Auth service
     }
 
     @Override
@@ -44,7 +44,8 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                                 .queryParam("token", token)
                                 .build())
                         .retrieve()
-                        .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
+                        .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
+                        })
                         .flatMap(response -> {
                             Integer userId = (Integer) response.get("userId");
 
@@ -61,7 +62,6 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
         };
     }
 
-
-
-    public static class Config {}
+    public static class Config {
+    }
 }
