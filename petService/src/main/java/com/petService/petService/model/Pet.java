@@ -18,13 +18,14 @@ public class Pet {
 
     private String name;
 
-    private String type;
-
-    private Integer age;
+    private String type;    private Integer age;
 
     private String image;
 
     private Integer ownerId; // this links to a User entity
+
+    @Enumerated(EnumType.STRING)
+    private PetStatus status = PetStatus.SAFE; // Default status is SAFE
 
     private Date birthDate;
 
@@ -67,6 +68,14 @@ public class Pet {
 
     public void setOwnerId(Integer ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public PetStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PetStatus status) {
+        this.status = status;
     }
 
     public Date getBirthDate() {
