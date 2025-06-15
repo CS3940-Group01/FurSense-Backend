@@ -7,6 +7,7 @@ import com.petService.petService.model.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +40,7 @@ public class LostPetAlertService {
             Pet pet = petOptional.get();
             if (!pet.getOwnerId().equals(ownerId)) {
                 log.warn("Pet {} does not belong to owner {}", request.getPetId(), ownerId);
-                return ResponseEntity.forbidden().build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             
             // Check if there's already an active alert for this pet
@@ -90,7 +91,7 @@ public class LostPetAlertService {
             
             LostPetAlert alert = alertOptional.get();
             if (!alert.getOwnerId().equals(ownerId)) {
-                return ResponseEntity.forbidden().build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             
             if (alert.getStatus() != AlertStatus.ACTIVE) {
@@ -138,7 +139,7 @@ public class LostPetAlertService {
             
             LostPetAlert alert = alertOptional.get();
             if (!alert.getOwnerId().equals(ownerId)) {
-                return ResponseEntity.forbidden().build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             
             if (alert.getStatus() != AlertStatus.ACTIVE) {
@@ -257,7 +258,7 @@ public class LostPetAlertService {
             
             LostPetAlert alert = alertOptional.get();
             if (!alert.getOwnerId().equals(ownerId)) {
-                return ResponseEntity.forbidden().build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             
             if (alert.getStatus() != AlertStatus.ACTIVE) {
