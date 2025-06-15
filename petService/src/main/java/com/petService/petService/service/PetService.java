@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +46,7 @@ public class PetService {
             Pet pet = petOptional.get();
             if (!pet.getOwnerId().equals(ownerId)) {
                 log.warn("Pet {} does not belong to owner {}", petId, ownerId);
-                return ResponseEntity.forbidden().build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             
             pet.setStatus(status);
@@ -86,7 +88,7 @@ public class PetService {
             
             Pet pet = petOptional.get();
             if (!pet.getOwnerId().equals(ownerId)) {
-                return ResponseEntity.forbidden().build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             
             // Update pet details

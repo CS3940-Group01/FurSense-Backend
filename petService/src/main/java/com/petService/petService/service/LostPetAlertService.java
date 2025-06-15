@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.http.HttpStatus;
+
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +41,7 @@ public class LostPetAlertService {
             Pet pet = petOptional.get();
             if (!pet.getOwnerId().equals(ownerId)) {
                 log.warn("Pet {} does not belong to owner {}", request.getPetId(), ownerId);
-                return ResponseEntity.forbidden().build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             
             // Check if there's already an active alert for this pet
@@ -90,7 +92,7 @@ public class LostPetAlertService {
             
             LostPetAlert alert = alertOptional.get();
             if (!alert.getOwnerId().equals(ownerId)) {
-                return ResponseEntity.forbidden().build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             
             if (alert.getStatus() != AlertStatus.ACTIVE) {
@@ -138,7 +140,7 @@ public class LostPetAlertService {
             
             LostPetAlert alert = alertOptional.get();
             if (!alert.getOwnerId().equals(ownerId)) {
-                return ResponseEntity.forbidden().build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             
             if (alert.getStatus() != AlertStatus.ACTIVE) {
@@ -257,7 +259,7 @@ public class LostPetAlertService {
             
             LostPetAlert alert = alertOptional.get();
             if (!alert.getOwnerId().equals(ownerId)) {
-                return ResponseEntity.forbidden().build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             
             if (alert.getStatus() != AlertStatus.ACTIVE) {
