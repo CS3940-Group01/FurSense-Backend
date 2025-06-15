@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.Date; // or java.time.LocalDate (recommended)
 
 @Entity
 @Table(name = "pets")
@@ -17,11 +18,17 @@ public class Pet {
 
     private String name;
 
-    private String type;
+    private String type;    private Integer age;
 
-    private Integer age;
+    private String image;
 
     private Integer ownerId; // this links to a User entity
+
+    @Enumerated(EnumType.STRING)
+    private PetStatus status = PetStatus.SAFE; // Default status is SAFE
+
+    private Date birthDate;
+
 
     public Integer getId() {
         return id;
@@ -61,5 +68,29 @@ public class Pet {
 
     public void setOwnerId(Integer ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public PetStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PetStatus status) {
+        this.status = status;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

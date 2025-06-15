@@ -41,7 +41,7 @@ spring:
                 - id: pet
                   uri: ${PET_SERVICE_URL:http://localhost:8093}
                   predicates:
-                    - Path=/pet/**
+                    - Path=/pet/**,/vaccine/**
                   filters:
                     - AuthFilter
 
