@@ -23,8 +23,8 @@ public class PetController {
     }
 
     @GetMapping("/getPetsByOwnerId")
-    public ResponseEntity<List<Pet>> getPetsByOwnerId(@RequestParam Integer ownerId) {
-        return petService.getPetsByOwnerId(ownerId);
+    public ResponseEntity<List<Pet>> getPetsByOwnerId(@RequestHeader("userid") Integer userId) {
+        return petService.getPetsByOwnerId(userId);
     }
 
     @PostMapping("/addPet")
