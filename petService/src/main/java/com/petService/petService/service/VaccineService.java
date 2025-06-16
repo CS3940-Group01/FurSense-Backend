@@ -4,6 +4,7 @@ import com.petService.petService.external.repository.VaccineRepository;
 import com.petService.petService.external.repository.VaccineScheduleRepository;
 
 import com.petService.petService.external.repository.VaccineLogRepository;
+import com.petService.petService.model.Pet;
 import com.petService.petService.model.Vaccine;
 import com.petService.petService.model.VaccineLog;
 import com.petService.petService.model.VaccineSchedule;
@@ -44,6 +45,13 @@ public class VaccineService {
         vaccineLogRepository.save(vaccineLog);
         return ResponseEntity.ok("Vaccine added successfully");
     }
+
+    public ResponseEntity<List<VaccineLog>> getVaccineLogbyPetId(Integer petId) {
+        List<VaccineLog> vaccineLogs = vaccineLogRepository.findByPetId(petId);
+        return ResponseEntity.ok(vaccineLogs);
+    }
+
+
 
     public ResponseEntity<List<VaccineSchedule>> getScheduleByPetId(Integer petId) {
         List<VaccineSchedule> vaccineSchedules = vaccineScheduleRepository.getScheduleByPetId(petId);
