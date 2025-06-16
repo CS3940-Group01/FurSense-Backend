@@ -1,6 +1,7 @@
 package com.fursense.gateway.filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -18,10 +19,12 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
     private final WebClient webClient;
 
     @Autowired
-    public AuthFilter(RouteValidator validator, WebClient.Builder webClientBuilder) {
+    public AuthFilter(RouteValidator validator, WebClient.Builder webClientBuilder, @Value("${AUTH_SERVICE_URL:http://localhost:8090}") String authServiceUrl) {
         super(Config.class);
         this.validator = validator;
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8090/auth").build(); // your Auth service
+        this.webClient = webClientBuilder
+                .baseUrl(authServiceUrl + "/auth")
+                .build();
     }
 
     @Override
