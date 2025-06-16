@@ -35,10 +35,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.netflix.graphql.dgs</groupId>
-			<artifactId>graphql-dgs-spring-graphql-starter</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.netflix.graphql.dgs</groupId>-->
+<!--			<artifactId>graphql-dgs-spring-graphql-starter</artifactId>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -50,23 +50,32 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.netflix.graphql.dgs</groupId>-->
+<!--			<artifactId>graphql-dgs-spring-graphql-starter-test</artifactId>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 		<dependency>
-			<groupId>com.netflix.graphql.dgs</groupId>
-			<artifactId>graphql-dgs-spring-graphql-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
 		</dependency>
-	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.netflix.graphql.dgs</groupId>
-				<artifactId>graphql-dgs-platform-dependencies</artifactId>
-				<version>${netflix-dgs.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+    </dependencies>
+<!--	<dependencyManagement>-->
+<!--		<dependencies>-->
+<!--			<dependency>-->
+<!--				<groupId>com.netflix.graphql.dgs</groupId>-->
+<!--				<artifactId>graphql-dgs-platform-dependencies</artifactId>-->
+<!--				<version>${netflix-dgs.version}</version>-->
+<!--				<type>pom</type>-->
+<!--				<scope>import</scope>-->
+<!--			</dependency>-->
+<!--		</dependencies>-->
+<!--	</dependencyManagement>-->
 
 	<build>
 		<plugins>
@@ -82,26 +91,26 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>io.github.deweyjose</groupId>
-				<artifactId>graphqlcodegen-maven-plugin</artifactId>
-				<version>1.61.5</version>
-				<executions>
-					<execution>
-						<id>dgs-codegen</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<schemaPaths>
-								<param>src/main/resources/graphql-client</param>
-							</schemaPaths>
-							<packageName>com.fursense.notifications.codegen</packageName>
-							<addGeneratedAnnotation>true</addGeneratedAnnotation>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>io.github.deweyjose</groupId>-->
+<!--				<artifactId>graphqlcodegen-maven-plugin</artifactId>-->
+<!--				<version>1.61.5</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>dgs-codegen</id>-->
+<!--						<goals>-->
+<!--							<goal>generate</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<schemaPaths>-->
+<!--								<param>src/main/resources/graphql-client</param>-->
+<!--							</schemaPaths>-->
+<!--							<packageName>com.fursense.notifications.codegen</packageName>-->
+<!--							<addGeneratedAnnotation>true</addGeneratedAnnotation>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
