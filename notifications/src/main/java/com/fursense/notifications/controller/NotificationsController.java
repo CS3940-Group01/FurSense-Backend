@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class NotificationsController {
 
     @GetMapping("/ready")
-    public ResponseEntity<?> ready(@RequestHeader HttpHeaders headers) {
-        System.out.println(headers);
+    public ResponseEntity<?> ready(@RequestHeader("userid") Integer userId) {
+        System.out.println(userId);
         return ResponseEntity.ok().build();
     }
 }
