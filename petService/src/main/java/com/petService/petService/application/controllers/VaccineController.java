@@ -39,5 +39,10 @@ public class VaccineController {
     public ResponseEntity<String> addVaccineLog(@RequestBody VaccineLog vaccineLog) {
         return vaccineService.updateVaccineLog(vaccineLog);
     }
+
+    @GetMapping("/getVaccineLog/{petId}")
+    public ResponseEntity<List<VaccineLog>> getVaccineLogbyPetId(@PathVariable Integer petId) {
+        return vaccineService.getVaccineLogbyPetId(petId);
+    }
     
 }

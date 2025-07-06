@@ -27,9 +27,10 @@ public class PetService {
         return ResponseEntity.ok(pets);
     }
 
-    public ResponseEntity<Pet> addPet(Pet pet) {
+    public ResponseEntity<Pet> addPet(Pet pet, Integer userId) {
         log.atInfo()
-                .log("Adding pet with name: {} and ownerId: {}", pet.getName(), pet.getOwnerId());
+                .log("Adding pet with name: {} and ownerId: {}", pet.getName(), userId);
+        pet.setOwnerId(userId);
         Pet savedPet = petRepository.save(pet);
         return ResponseEntity.ok(savedPet);
     }

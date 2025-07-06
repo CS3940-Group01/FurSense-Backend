@@ -28,8 +28,8 @@ public class PetController {
     }
 
     @PostMapping("/addPet")
-    public ResponseEntity<Pet> addPet(@RequestBody Pet pet) {
-        return petService.addPet(pet);
+    public ResponseEntity<Pet> addPet(@RequestHeader("userid") Integer userId, @RequestBody Pet pet) {
+        return petService.addPet(pet,userId);
     }
 
     @GetMapping("/{petId}")
